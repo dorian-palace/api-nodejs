@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const jwtUtils = require('../utils/jsw.utils');
 const models = require('../models');
 
 // Routes
@@ -49,5 +49,36 @@ module.exports = {
     },
     login: function(req, res){
 
+        //params login
+        const email = req.body.email;
+        const password = req.body.password;
+
+        if (email == null || password == null ) {
+            return res.status(400).json({'error': 'params manquant'});
+        }
+
+        models.user.findOne({
+            where: {email : email}
+        })
+        .then(function(userFound){
+            if (userFound){
+
+                bcrypt.compare(password, userFound.password, function(errBycrypt, resBycrypt){
+                    if(resBycrypt) {
+                        return res.status(200).json({
+                            'id' : userFound.id,
+                            'token': jwtUtils.generateTokenForUser(userFound)
+                        });
+                    } else {
+                        return res.status(403).json({'error': 'mot de passe invalide'});
+                    }
+                })
+            } else {
+                return res.status(404).json({'error': 'l‘utilisateur n‘éxiste pas en DB'});
+            }
+        }) 
+        .catch(function(err){
+            return res.status(500).json({'error': 'impossible de trouver l‘utilisateur'});
+        })
     }
 }
