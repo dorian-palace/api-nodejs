@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwtUtils = require('../utils/jsw.utils');
 const models = require('../models');
+const { Sequelize } = require('../models');
 
 // Routes
 module.exports = {
@@ -80,5 +81,25 @@ module.exports = {
         .catch(function(err){
             return res.status(500).json({'error': 'impossible de trouver l‘utilisateur'});
         })
+    },
+
+    listUser: function(req, res) {
+        // const firstname = req.body.firstname;
+        // // console.log(firstname)
+        // const lastname = req.body.lastname;
+
+        models.user.findAll({
+            attributes: ['firstname', 'lastname']
+            // attributes: {['firstname']['lastname']}
+                // firstname: Sequelize.firstname,
+                // lastname: Sequelize.lastname
+        }).then(function(messages){
+            return res.status(200).json(messages);
+        }).catch(function(err){
+            console.log(err);
+            res.status(500).json({'error': 'champs invalide'});
+        });
+
     }
+
 }

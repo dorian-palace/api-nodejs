@@ -9,6 +9,7 @@ exports.router =  (function () {
     //Route Utilisateur 
     apiRouter.route('/user/register/').post(usersCtrl.register);
     apiRouter.route('/user/login/').post(usersCtrl.login);
+    apiRouter.route('/user/').get(usersCtrl.listUser);
 
     return apiRouter;
 })();
