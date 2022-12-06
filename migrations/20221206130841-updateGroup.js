@@ -7,7 +7,7 @@ module.exports = {
     return queryInterface.addColumn(
       'users',
       'idGroup',
-     Sequelize.BOOLEAN
+     Sequelize.INTEGER
     );
     /**
      * Add altering commands here.
@@ -21,7 +21,7 @@ module.exports = {
     return queryInterface.removeColumn(
       'Groupes',
       'idUser',
-      Sequelize.BOOLEAN
+      Sequelize.INTEGER
     );
     /**
      * Add reverting commands here.

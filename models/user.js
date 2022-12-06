@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.user.hasMany(models.Groupe)
+      models.user.hasMany(models.Groupe, {
+        foreignKey: {
+          allowNull: false
+        }
+      })
     }
   }
   user.init({
@@ -21,7 +25,11 @@ module.exports = (sequelize, DataTypes) => {
     lastname: DataTypes.STRING,
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
-    // idGroup: DataTypes.tinyint,
+    idGroup: {
+      type : DataTypes.INTEGER,
+      required: true,
+      allowNull: false
+    },
   }, {
     sequelize,
     modelName: 'user',

@@ -36,6 +36,15 @@ module.exports = {
     },
 
     listGroup: function(req, res){
-
+        models.Groupe.findAll({
+            attributes : ['name']
+        })
+        .then(function(messages){
+            return res.status(200).json(messages);
+        })
+        .catch(function(err){
+            console.log(err)
+            res.status(500).json({'error': 'champ invalide'});
+        });
     }
 }

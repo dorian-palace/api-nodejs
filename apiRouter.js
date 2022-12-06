@@ -14,6 +14,6 @@ exports.router =  (function () {
 
     //Route Group
     apiRouter.route('/group/new/').post(groupCtrl.newGroup);
-    apiRouter.route('group/').get(groupCtrl.listGroup);
+    apiRouter.route('/group/').get(groupCtrl.listGroup);
     return apiRouter;
 })();
