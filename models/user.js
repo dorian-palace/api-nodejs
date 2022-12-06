@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
     createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE
+    updatedAt: DataTypes.DATE,
+    // idGroup: DataTypes.tinyint,
   }, {
     sequelize,
     modelName: 'user',

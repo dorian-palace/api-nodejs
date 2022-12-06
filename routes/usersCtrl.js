@@ -84,22 +84,16 @@ module.exports = {
     },
 
     listUser: function(req, res) {
-        // const firstname = req.body.firstname;
-        // // console.log(firstname)
-        // const lastname = req.body.lastname;
-
         models.user.findAll({
             attributes: ['firstname', 'lastname']
-            // attributes: {['firstname']['lastname']}
-                // firstname: Sequelize.firstname,
-                // lastname: Sequelize.lastname
-        }).then(function(messages){
+        })
+        .then(function(messages){
             return res.status(200).json(messages);
-        }).catch(function(err){
+        })
+        .catch(function(err){
             console.log(err);
             res.status(500).json({'error': 'champs invalide'});
         });
-
     }
 
 }
